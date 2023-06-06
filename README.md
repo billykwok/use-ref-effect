@@ -7,7 +7,7 @@
 
 Like `useEffect`, but optimized for `ref`.
 
-- Guaranteed to run once, and only once, when ref is attached or detached.
+- Guaranteed to execute only when ref is either attached or detached.
 - Perfect for setting and cleaning up event listeners compared to `useEffect`.
 - Much easier `deps` array management as `ref` value is supplied as an argument instead.
 - Fully composable by accepting an existing `ref`, and returning a `ref` that implements both `MutableRefObject` and `RefCallback`.
@@ -21,7 +21,7 @@ Here is a simplfied demonstration on how easy to use `useRefEffect`.
 
 ```tsx
 import { type ForwardedRef, type Ref, forwardRef } from 'react';
-import useRefEffect from 'use-ref-effect';
+import { useRefEffect } from 'use-ref-effect';
 
 export function Component() {
   const ref = useRefEffect<HTMLDivElement>((el: HTMLDivElement) => {
@@ -49,6 +49,11 @@ export const ComponentExposingRef = forwardRef(function HelloWorld(
   return <div ref={innerRef}>Hello World</div>;
 });
 ```
+
+## Gotchas
+
+- Different from `useEffect`, when the dependency array changes, the effect and its cleanup do NOT re-run. Instead, it behaves like `useCallback` in which the closure is updated to capture external changes. The effect and its cleanup only re-run when the returned `ref` is updated.
+- Different from `useEffect`, `useRefEffect` cannot run on initial render. This is because `ref` is not attached yet.
 
 ## Support
 
