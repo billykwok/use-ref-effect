@@ -1,7 +1,7 @@
 {
   "name": "use-ref-effect",
-  "description": "Like useRef, but with lifecycle and ref merging support",
-  "version": "1.0.0",
+  "description": "Like useEffect, but optimized for ref",
+  "version": "1.0.1",
   "type": "module",
   "exports": {
     "types": "./types/index.d.ts",

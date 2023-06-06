@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/billykwok/use-ref-effect/branch/main/graph/badge.svg?token=I73J70MS2V)](https://codecov.io/gh/billykwok/use-ref-effect)
 [![Test](https://github.com/billykwok/use-ref-effect/actions/workflows/test.yml/badge.svg)](https://github.com/billykwok/use-ref-effect/actions/workflows/test.yml)
 
-Like `useEffect`, but for `ref`.
+Like `useEffect`, but optimized for `ref`.
 
 - Guaranteed to run once, and only once, when ref is attached or detached.
 - Perfect for setting and cleaning up event listeners compared to `useEffect`.
