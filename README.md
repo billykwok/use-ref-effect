@@ -9,7 +9,6 @@ Like `useEffect`, but optimized for `ref`.
 
 - Guaranteed to execute only when ref is either attached or detached.
 - Perfect for setting and cleaning up event listeners compared to `useEffect`.
-- Much easier `deps` array management as `ref` value is supplied as an argument instead.
 - Fully composable by accepting an existing `ref`, and returning a `ref` that implements both `MutableRefObject` and `RefCallback`.
 - Support all kinds of renderers from `react-dom` and `react-native` to `react-three/fiber` and anything else.
 - Work with both `forwardRef` and `useImperativeHandle`.
@@ -23,45 +22,51 @@ Here is a simplfied demonstration on how easy to use `useRefEffect`.
 import { type ForwardedRef, type Ref, forwardRef } from 'react';
 import { useRefEffect } from 'use-ref-effect';
 
-export function Component() {
-  const ref = useRefEffect<HTMLDivElement>((el: HTMLDivElement) => {
+export function Component(props) {
+  const ref = useRefEffect<HTMLDivElement>((el) => {
     console.log(`${el} attached`);
+    function onClick() {
+      console.log('clicked');
+    }
+    el.addEventListener('click', onClick);
     return () => {
+      el.removeEventListener('click', onClick);
       console.log(`${el} detached`);
     };
-  }, []);
+  });
   return <div ref={ref}>Hello World</div>;
 }
 
-export const ComponentExposingRef = forwardRef(function HelloWorld(
-  ref: ForwardedRef<HTMLDivElement>
-) {
-  const innerRef = useRefEffect<HTMLDivElement>(
-    (el: HTMLDivElement) => {
+export const ComponentExposingRef = forwardRef(
+  (props, ref: ForwardedRef<HTMLDivElement>) => {
+    const innerRef = useRefEffect<HTMLDivElement>((el) => {
       console.log(`${el} attached`);
+      function onClick() {
+        console.log('clicked');
+      }
+      el.addEventListener('click', onClick);
       return () => {
+        el.removeEventListener('click', onClick);
         console.log(`${el} detached`);
       };
-    },
-    [],
-    ref
-  );
-  return <div ref={innerRef}>Hello World</div>;
-});
+    }, ref);
+    return <div ref={innerRef}>Hello World</div>;
+  }
+);
 ```
 
 ## Gotchas
 
-- Different from `useEffect`, when the dependency array changes, the effect and its cleanup do NOT re-run. Instead, it behaves like `useCallback` in which the closure is updated to capture external changes. The effect and its cleanup only re-run when the returned `ref` is updated.
-- Different from `useEffect`, `useRefEffect` cannot run on initial render. This is because `ref` is not attached yet.
+- This hook is more akin to the currently experimental [`useEffectEvent`](https://react.dev/learn/separating-events-from-effects#declaring-an-effect-event) hook than typical `useEffect` hook. The effect callback is **NOT** reactive (i.e. always capture the latest values without the need to signal an update through a dependency array). In other words, the effect and its cleanup only re-run when the returned `ref` is updated by DOM mutation or the equivalent actions when used for other purposes.
+- Different from `useEffect`, `useRefEffect` **NEVER** runs on the initial render. This is because React executes [`RefCallback`](https://react.dev/reference/react-dom/components/common#ref-callback) the first time after the underlying resource is available. In the case of `react-dom`, it is after the DOM element is first rendered into the actual DOM tree.
 
 ## Support
 
-This library has been continuously used in many of my personal projects, and is regarded as production-ready. In the foreseeable future, I will continuously maintain and support this library.
+This library is used in most of my personal projects, and is regarded as production-ready by myself. In the foreseeable future, I will continuously maintain and support this library.
 
 ## Issues and Feedback
 
-Please voice your opinion and report bugs in the [issues](https://github.com/billykwok/use-ref-effect/issues) sections of this GitHub project.
+Please voice your opinions and report bugs in the [issues](https://github.com/billykwok/use-ref-effect/issues) sections of this GitHub project.
 
 ## Contributing
 

@@ -19,7 +19,7 @@ describe('should update inner and outer refs, and call listeners correctly', () 
     const outerRef: Ref<Element> = createRef();
     const {
       result: { current: innerRef },
-    } = renderHook(() => useRefEffect(effect, [], outerRef));
+    } = renderHook(() => useRefEffect(effect, outerRef));
     expect(effect).not.toHaveBeenCalled();
     expect(uneffect).not.toHaveBeenCalled();
     expect(innerRef.current).toBeNull();
@@ -44,7 +44,7 @@ describe('should update inner and outer refs, and call listeners correctly', () 
     const outerRef: Ref<Element> = createRef();
     const {
       result: { current: innerRef },
-    } = renderHook(() => useRefEffect(effect, [], outerRef));
+    } = renderHook(() => useRefEffect(effect, outerRef));
     expect(effect).not.toHaveBeenCalled();
     expect(uneffect).not.toHaveBeenCalled();
     expect(innerRef.current).toBeNull();
@@ -75,7 +75,7 @@ describe('should update inner and outer refs, and call listeners correctly', () 
     });
     const {
       result: { current: innerRef },
-    } = renderHook(() => useRefEffect(effect, [], outerRef));
+    } = renderHook(() => useRefEffect(effect, outerRef));
     expect(effect).not.toHaveBeenCalled();
     expect(uneffect).not.toHaveBeenCalled();
     expect(innerRef.current).toBeNull();
@@ -104,7 +104,7 @@ describe('should update inner and outer refs, and call listeners correctly', () 
     });
     const {
       result: { current: innerRef },
-    } = renderHook(() => useRefEffect(effect, [], outerRef));
+    } = renderHook(() => useRefEffect(effect, outerRef));
     expect(effect).not.toHaveBeenCalled();
     expect(uneffect).not.toHaveBeenCalled();
     expect(innerRef.current).toBeNull();
