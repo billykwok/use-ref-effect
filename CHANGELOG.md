@@ -1,5 +1,11 @@
 # use-ref-effect
 
+## 1.1.0
+
+### Minor Changes
+
+- c67a528: feat: make effect non-reactive
+
 ## 1.0.7
 
 ### Patch Changes
