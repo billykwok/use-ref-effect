@@ -16,7 +16,7 @@ Like `useEffect`, but optimized for `ref`.
 
 ## Quick Look
 
-Here is a simplfied demonstration on how easy to use `useRefEffect`.
+Here is a simple demonstration.
 
 ```tsx
 import { type ForwardedRef, type Ref, forwardRef } from 'react';

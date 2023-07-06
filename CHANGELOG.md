@@ -1,5 +1,11 @@
 # use-ref-effect
 
+## 2.0.0
+
+### Major Changes
+
+- feat: remove ref merging and adopt use-recapture
+
 ## 1.1.0
 
 ### Minor Changes
