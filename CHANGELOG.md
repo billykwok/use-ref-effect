@@ -1,5 +1,11 @@
 # use-ref-effect
 
+## 2.0.2
+
+### Patch Changes
+
+- docs: remove more outdated documentation
+
 ## 2.0.1
 
 ### Patch Changes

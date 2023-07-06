@@ -8,10 +8,8 @@
 Like `useEffect`, but optimized for `ref`.
 
 - Guaranteed to execute only when ref is either attached or detached.
+- Minimize re-rendering as the returned ref is always stable.
 - Perfect for setting and cleaning up event listeners compared to `useEffect`.
-- Fully composable by accepting an existing `ref`, and returning a `ref` that implements both `MutableRefObject` and `RefCallback`.
-- Support all kinds of renderers from `react-dom` and `react-native` to `react-three/fiber` and anything else.
-- Work with both `forwardRef` and `useImperativeHandle`.
 - Written in TypeScript with absolutely minimal bundle size.
 
 ## Quick Look
@@ -19,7 +17,6 @@ Like `useEffect`, but optimized for `ref`.
 Here is a simple demonstration.
 
 ```tsx
-import { type ForwardedRef, type Ref, forwardRef } from 'react';
 import { useRefEffect } from 'use-ref-effect';
 
 export function Component(props) {
