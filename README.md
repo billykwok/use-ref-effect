@@ -36,23 +36,6 @@ export function Component(props) {
   });
   return <div ref={ref}>Hello World</div>;
 }
-
-export const ComponentExposingRef = forwardRef(
-  (props, ref: ForwardedRef<HTMLDivElement>) => {
-    const innerRef = useRefEffect<HTMLDivElement>((el) => {
-      console.log(`${el} attached`);
-      function onClick() {
-        console.log('clicked');
-      }
-      el.addEventListener('click', onClick);
-      return () => {
-        el.removeEventListener('click', onClick);
-        console.log(`${el} detached`);
-      };
-    }, ref);
-    return <div ref={innerRef}>Hello World</div>;
-  }
-);
 ```
 
 ## Gotchas
