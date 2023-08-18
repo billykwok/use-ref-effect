@@ -1,5 +1,11 @@
 # use-ref-effect
 
+## 2.0.3
+
+### Patch Changes
+
+- chore: update dependencies
+
 ## 2.0.2
 
 ### Patch Changes

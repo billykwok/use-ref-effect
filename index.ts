@@ -4,7 +4,7 @@ import { useEventEffect, useRecapture } from 'use-recapture';
 export type CleanUp = () => void;
 
 export function useRefEffect<T = unknown>(
-  effect: (value: T) => CleanUp | void
+  effect: (value: T) => CleanUp | void,
 ): RefCallback<T> {
   const innerRef = useRef<T>(null);
   const [onDetached, recaptureOnDetached] = useRecapture();
